@@ -11,18 +11,16 @@ $gray-4: #e2e5ee;
 $bg-color: #f8f8f8;
 
 // mixins
-@mixin back{
-	&:before {
-		content: '';
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		top: 0;
-		background-color: #000;
-		opacity: 0;
-		transition: 0.3s all;
-	}	
+%image-opacity {
+	content: '';
+	transition: .3s;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: #8e8e99;
+	opacity: 0.3;
 }
 
 %img {
