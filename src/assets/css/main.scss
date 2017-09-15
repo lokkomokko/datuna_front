@@ -4,11 +4,11 @@
 // import fonts
 @import 'fonts';
 
-// import common style elements
-@import 'elements';
-
 // import settings
 @import 'settings.scss';
+
+// import common style elements
+@import 'elements';
 
 // base stylesheet
 html {
@@ -17,12 +17,22 @@ html {
 body {
 	font-family: a_font;
 	font-weight: normal;
-	// display: flex;
 	min-height: 100vh;
-	width: 100vw;
+	width: 100%;
 	position: relative;
 	-webkit-font-smoothing: antialiased;
 	position: relative;
-	background-color: red;
 	overflow-x: hidden;
+	line-height: 1.4rem;
+	color: $gray-1;
+	background-color: $bg-color;
 }
+
+.main-wrapper, .header, .header__bottom-block-wrapper {
+	max-width: 1600px;
+	width: 100%;
+	margin: 0 auto;
+}
+// imports site part
+@import 'header';
+@import 'page-1';

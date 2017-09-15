@@ -1,0 +1,108 @@
+// common elements
+
+.container {
+	box-sizing: border-box;
+	margin: 0 55px;
+	padding: 0 7rem;
+	&--gray {
+		background-color: $gray-4;
+	}
+}
+
+.title-h4, .title-h2, .title-usual, .link-2, .menu-item, .button{
+	font-family: f_font;
+	text-transform: uppercase;	
+}
+
+.title-h1 {
+	font-size: 1.64706rem;
+	line-height: 3.31765rem;
+} 
+.title-h2 {
+	font-size: 4.47059rem;
+	line-height: 7.41176rem;
+	letter-spacing: -0.0558824rem;
+	color: #fff;
+}
+.title-h4 {
+	font-size: 2.11765rem;
+	line-height: 2rem;
+	color: $gray-2;
+}
+.title-usual {
+	font-size: 1.05882rem;
+	line-height: 2rem;
+	color: $gray-2;
+}
+.small-text {
+	line-height: 1.11176rem;
+	font-size: 0.764706rem;
+	color: $gray-3;
+}
+.link-1 {
+	border-bottom: 2px solid $blue;
+	&:hover {
+		color: $blue;
+	}
+}
+.link-2 {
+	letter-spacing: 0.0941176rem;
+	font-size: 0.647059rem;
+	color: $blue;
+	&:hover {
+		color: $blueHover;
+	}
+}
+
+.menu {
+	&__icon {
+		position: fixed;
+		left: 36px;
+		top: 39px;
+		width: 30px;
+		height: 14px;
+	}
+	&-item {
+		font-size: 2.11765rem;
+		line-height: 2rem;
+		color: $gray-4;
+		cursor: pointer;
+		&:hover {
+			color: #fff;
+		}
+	}	
+}
+.button {
+
+// html
+// <a  class="button" href="">
+// 	next
+// 	<span class="button__arrow" v-html="btn_arrow"></span>
+// </a>
+
+	color: $blue;
+	padding: 1.17647rem 4.41176rem 0.88rem;
+	box-sizing: border-box;
+	display: inline-flex;
+	font-size: 0.647059rem;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.23);
+	position: relative;
+	letter-spacing: 0.0941176rem;
+	&__arrow {
+		display: block;
+		position: absolute;
+	    top: 20px;
+	    right: 32px;
+		svg {
+			width: 8px;
+			height: 8px;
+		}
+	}
+	&:hover {
+		color: $blueHover;
+	}
+}
+

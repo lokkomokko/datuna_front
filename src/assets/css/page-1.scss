@@ -1,0 +1,12 @@
+.separate-block {
+	display: flex;
+	justify-content: flex-end;
+    padding: 0 8.70588rem;
+	margin-bottom: 2.47059rem;
+	&__right-side {
+
+	}
+	&__text {
+		max-width: 21rem;
+	}
+}

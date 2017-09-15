@@ -1,0 +1,33 @@
+// variables
+
+$blue: #58a2da;
+$blueHover: #83bbe4;
+
+$gray-1: #676779;
+$gray-2: #9696aa;
+$gray-3: #626275;
+$gray-4: #e2e5ee;
+
+$bg-color: #f8f8f8;
+
+// mixins
+@mixin back{
+	&:before {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		background-color: #000;
+		opacity: 0;
+		transition: 0.3s all;
+	}	
+}
+
+%img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;	
+}
