@@ -58,7 +58,11 @@
     z-index: 10;
     position: fixed;
     left: 0;
-    right: 0;
+    bottom: 0;
+    // right: 0;
+
+    // max-width: 27.9412rem;
+    // width: 100%;    
     top: 0;
     &--open {
     	.menu__nav {
@@ -72,7 +76,7 @@
     }
 	&__icons {
 		position: absolute;
-		left: 36px;
+		left: 13px;
 		top: 39px;
 		width: 30px;
 		height: 14px;
@@ -113,8 +117,8 @@
 		bottom: 0;
 		left: 0;
 		background-color: $gray-2;
-	    max-width: 27.9412rem;
-	    width: 100%;
+	    width: 27.9412rem;
+	    // width: 100%;
 	    height: 100vh;		
 	    z-index: 0;
 	    transition: 0.5s;
@@ -123,16 +127,17 @@
 	    padding-top: 7rem;	    
 	    padding-left: 2.41176rem;
 	    transform: translateX(-50vw);
-	    &:after {
-	    	content: '';
-	    	position: absolute;
-	    	left: -49.5vw;
-	    	top: 0;
-	    	bottom: 0;
-	    	background-color: $gray-2;
-	    	width: 50vw;
+	    background-color: $gray-2;
+	    // &:after {
+	    // 	content: '';
+	    // 	position: absolute;
+	    // 	left: -49.5vw;
+	    // 	top: 0;
+	    // 	bottom: 0;
+	    // 	background-color: $gray-2;
+	    // 	width: 50vw;
 
-	    }
+	    // }
 	}
 }
 
@@ -164,15 +169,17 @@
 	align-items: center;
 	justify-content: center;
 	background-color: #fff;
-	box-shadow: 1px 1px 12px 0px rgba(0, 0, 0, 0.23);
+	box-shadow: 0px 23px 20px -18px rgba(0, 0, 0, 0.13);
 	position: relative;
 	letter-spacing: 0.0941176rem;
 	cursor: pointer;
+	transition: 0.3s;
 	&__arrow {
 		display: block;
 		position: absolute;
 	    top: 20px;
 	    right: 32px;
+	    transition: 0.3s;
 		svg {
 			width: 8px;
 			height: 8px;
@@ -180,6 +187,10 @@
 	}
 	&:hover {
 		color: $blueHover;
+		box-shadow: 0px 23px 35px -18px rgba(0, 0, 0, 0.2);
+		.button__arrow {
+			transform: translateX(4px);
+		}
 	}
 }
 

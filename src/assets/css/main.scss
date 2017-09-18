@@ -28,7 +28,7 @@ body {
 	background-color: $bg-color;
 }
 
-.main-wrapper, .header, .header__bottom-block-wrapper, .menu {
+.main-wrapper, .header, .header__bottom-block-wrapper, .wrap-f-title{
 	max-width: 1600px;
 	width: 100%;
 	margin: 0 auto;
@@ -36,3 +36,4 @@ body {
 // imports site part
 @import 'header';
 @import 'page-1';
+@import 'media';

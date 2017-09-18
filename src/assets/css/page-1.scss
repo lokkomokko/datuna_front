@@ -38,14 +38,14 @@
 		}
 	}
 	&:before {
-		content: '';
-		background-color: $bg-color;
-		left: 0;
-		top: -3em;
-		right: 0;
-		z-index: 1;
-		height: 3em;
-		position: absolute;
+	    content: '';
+	    background-color: #f8f8f8;
+	    left: 0;
+	    top: -3em;
+	    right: 0;
+	    position: absolute;
+	    bottom: -300px;
+	    z-index: -1;
 	}	
 }
 
@@ -194,7 +194,11 @@
 		border-left: 2px solid transparent;
 		position: relative;
 		left: -1.70588rem;
-	    padding-bottom: 6.05882rem;
+		display: inline-block;
+	    margin-bottom: 6.05882rem;
+	    &:hover {
+	    	color: $gray-2;
+	    }
 		&:after {
 			content:'';
 			position: absolute;
@@ -202,13 +206,13 @@
 			background-color: $gray-4;
 			top: 0;
 			left: 0;
-			bottom: -80px;
+			bottom: -180px;
 		}		
 	}
 }
 
 .art-item {
-	background-color: #fff;
+	background-color: #F8F8F8;
 	display: flex;
 	height: 38.5vmax;
 	max-height: 36.9412rem;	

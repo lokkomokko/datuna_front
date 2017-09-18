@@ -9,7 +9,7 @@
 				
 			</div>
 
-			<p class="header__title title-usual">DAVID DATUNA</p>
+			
 			<nav class="menu__nav">
 				<a href="" class="menu-item">WORKS</a>
 				<a href="" class="menu-item">SPECIAL PROJECTS</a>
@@ -31,22 +31,30 @@
 		</div>
 		<div class="wrapper-header">
 			<!-- sticky top part -->
+			
 			<header class="header">
-							
+											
 				<div class="header__image-wrap">
-					<img src="../assets/img/h1.png" class="header__image">
+					<img src="../assets/img/h1.jpg" class="header__image">
 					<div class="header__logo" v-html="logo"></div>
 				</div>				
 				<div class="header__empty-block"></div>
 			</header>			
 			
 		</div>		
-
+		<div class="wrap-f-title">
+			<p class="header__title title-usual">DAVID DATUNA</p>			
+		</div>
 		<div class="separate-block">
 			<div class="header__bottom-block-wrapper">
 				<div class="header__bottom-block">	
-					<h4 class="header__bottom-block-title  title-h4">HIS WORLD.</h4>
-					<h4 class="header__bottom-block-title title-h4">HIS ART.</h4>
+					<a href="" class="header__bottom-block-title  title-h4" v-scroll-to="{
+     el: '.separate-block',
+     duration: 1500}" >HIS WORLD.</a> <br>
+					<a href="" class="header__bottom-block-title title-h4" v-scroll-to="{
+     el: '.arts-section',
+     duration: 1500,
+      offset: -130,}" >HIS ART.</a>
 					<p class="header__bottom-block-scroll small-text">scroll down</p>
 				</div>					
 			</div>	
@@ -115,26 +123,12 @@
 			</section>
 			
 			<section class="common-block common-block_instagram">
+			
 				<h2 class="common-block__title title-h2">INSTAGRAM</h2>
 				<div class="common-block__item-wrap">
-					<a href="" class="common-block__item">
+					<a target="_blank" v-for="item in instagram_data" :href="item.link" class="common-block__item">
 						<div class="common-block__item-image">
-							<img src="../assets/img/i1.png"alt="" >
-						</div>
-					</a>
-					<a href="" class="common-block__item">
-						<div class="common-block__item-image">
-							<img src="../assets/img/i2.png"alt="" >
-						</div>
-					</a>
-					<a href="" class="common-block__item">
-						<div class="common-block__item-image">
-							<img src="../assets/img/i3.png"alt="" >
-						</div>
-					</a>					
-					<a href="" class="common-block__item">
-						<div class="common-block__item-image">
-							<img src="../assets/img/i4.png"alt="" >
+							<img :src="item.images.low_resolution.url" alt="" >
 						</div>
 					</a>					
 				</div>
@@ -151,7 +145,7 @@
 
 			<div class="arts-section__top-separator container">
 				<div class="arts-block__title-wrap">
-					<h3 class="arts-section__title title-h4">his art.</h3>
+					<a href="" class="arts-section__title title-h4">his art.</a>
 				</div>
 			</div>
 
@@ -164,7 +158,7 @@
 					<div class="art-item__text">
 						<div class="art-item__text-wrap-inner">
 							<div class="art-item__title-wrap">
-								<h4 class="art-item__title title-h4">flag</h4>
+								<h4 class="art-item__title title-h4">flags</h4>
 							</div>
 							<p class="art-item__desc">
 								Structurally, the eyeglasses are a symbolic expression of identity, illusion, perception, fragmentation and unification. 
@@ -219,7 +213,14 @@ import ins from '../assets/img/svg/in.svg'
 import fb from '../assets/img/svg/fb.svg'
 import menu_close from '../assets/img/svg/menu-close.svg'
 
+
+let jsonpAdapter = require('axios-jsonp');
+
 let i = 1;
+
+
+
+
 export default {
 	name: 'Home',
 	data () {
@@ -231,10 +232,16 @@ export default {
 			fb: render_svg(fb),
 			ins: render_svg(ins),
 			menu_close: render_svg(menu_close),
-
+			// insta
+			instagram_data: [],
 			// scroll
 			should_open: true
 		}
+	},
+  	methods:{
+	    // onScroll:function(e, position){
+	    //   this.position = position;
+ 	   // }
 	},
 
 	mounted: function() {
@@ -244,46 +251,112 @@ export default {
 			separate_block = document.querySelector('.separate-block'),
 			bottom_block = document.querySelector('.header__bottom-block-wrapper'),
 			that = this,
+			main_wrapper = document.querySelector('#app'),
 			menu = document.querySelector('.menu'),
 			header = document.querySelector('.wrapper-header');
 			
+			document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'
+			new SmoothScroll();
 
-	    window.onscroll = function(e) {
+			function SmoothScroll(el) {
+			  var t = this, h = document.documentElement;
+			  el = el || window;
+			  t.rAF = false;
+			  t.target = 0;
+			  t.scroll = 0;
+			  t.animate = function() {
+			    t.scroll += (t.target - t.scroll) * 0.05;
+			    if (Math.abs(t.scroll.toFixed(5) - t.target) <= 0.47131) {
+			      cancelAnimationFrame(t.rAF);
+			      t.rAF = false;
+			    }
+			    if (el == window) scrollTo(0, t.scroll);
+			    else el.scrollTop = t.scroll;
+			    if (t.rAF) t.rAF = requestAnimationFrame(t.animate);
+			  };
+			  el.onmousewheel = function(e) {
+			    e.preventDefault();
+			    e.stopPropagation();
+			    var scrollEnd = (el == window) ? h.scrollHeight - h.clientHeight : el.scrollHeight - el.clientHeight;
+			    t.target += (e.wheelDelta > 0) ? -100 : 100;
+			    if (t.target < 0) t.target = 0;
+			    if (t.target > scrollEnd) t.target = scrollEnd;
+			    if (!t.rAF) t.rAF = requestAnimationFrame(t.animate);
+			  };
+			  window.onresize = function() {
+				document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'			  	
+			  }
+			  el.onscroll = function() {
 	        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+
+
 	        header_image.style.transform = `translateY(${scrolled * -0.13}vh)`;
-				
+
+			
+
 
 			if (scrolled >= separate_block.offsetTop - 100) {
-				menu.querySelector('.header__title').style.opacity = 0
+				document.querySelector('.header__title').style.opacity = 0
 			}
 			if (scrolled < separate_block.offsetTop - 100) {
-				menu.querySelector('.header__title').style.opacity = 1
+				document.querySelector('.header__title').style.opacity = 1
 			}
 
 			if (scrolled >= separate_block.offsetHeight) {
 				bottom_block.classList.add('header__bottom-block-wrapper--static');
+			}	    
 
-				if (scrolled >= separate_block.offsetHeight * 2 ) {
-					header.classList.add('wrapper-header--close')
-				}
-				else {
-					header.classList.contains('wrapper-header--close') ? header.classList.remove('wrapper-header--close') : true
-				}
+			if (scrolled >= separate_block.offsetHeight * 2 ) {
+				header.classList.add('wrapper-header--close')
+			}
+			
+			if(scrolled < separate_block.offsetHeight * 2) {
+				header.classList.contains('wrapper-header--close') ? header.classList.remove('wrapper-header--close') : true
+			}			    
 
-			}	        
 			if (scrolled <= separate_block.offsetHeight){
 				bottom_block.classList.remove('header__bottom-block-wrapper--static')
 				
 				
 			}
 
-	    };
+
+			    if (t.rAF) return;
+			    t.target = (el == window) ? pageYOffset || h.scrollTop : el.scrollTop;
+			    t.scroll = t.target;
+
+
+
+			  };
+			}
+
+
 
 	    menu.querySelector('.menu__icons').onclick = function() {
 	    	menu.classList.toggle('menu--open')
+	    	document.querySelector('.header__title').classList.toggle('header__title--change-color')
 	    	console.log(this.should_open)
 	    	that.should_open = !that.should_open
-	    }  
+	    };
+
+	    // istagram **********************************
+		var token = '6046807226.dcce32a.395f836a5f3e4026aba6b2c0d4cda79f',
+		userid = 6046807226,
+		num_photos = 4;
+ 
+		axios.get(`https://api.instagram.com/v1/users/${userid}/media/recent`, {
+   		adapter: jsonpAdapter,			
+		    params: {
+		      access_token: token,
+		      count: num_photos,
+		    }
+		  })
+		  .then(function (data) {
+		  		that.instagram_data = data.data.data;
+		  })
+		  .catch(function (error) {
+		    console.log(error);
+		  });	    
 
 	}
 }

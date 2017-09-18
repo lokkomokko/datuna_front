@@ -40,6 +40,7 @@ module.exports = merge(baseWebpackConfig, {
       jquery: 'jquery-slim',
       'window.jQuery': 'jquery-slim',
       jQuery: 'jquery-slim',
+      axios: 'axios'
     }),    
   ]
 })
