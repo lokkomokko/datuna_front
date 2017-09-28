@@ -33,7 +33,11 @@ var webpackConfig = merge(baseWebpackConfig, {
       'process.env': env
     }),
     new webpack.ProvidePlugin({
-      axios: 'axios'
+      axios: 'axios',
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery',      
     }),     
     new webpack.optimize.UglifyJsPlugin({
       compress: {

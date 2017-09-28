@@ -106,10 +106,10 @@
 
 			<section class="foundation">
 				
-				<div class="foundation__image">
+				<a href="" class="foundation__image">
 					<h2 class="foundation__title title-h2">foundation</h2>
 					<img src="../assets/img/f1.png" alt="">
-				</div>
+				</a>
 				<div class="foundation__text-wrap">
 					<p class="foundation__text">
 						Following his battle with cancer, Datuna established The Fund for Life, a philanthropic organization dedicated to fighting fatal diseases worldwide. In conjunction with the Fund, David also established the Life Award, which is given to corporations and individuals for exceptional contributions to sustaining and saving of human lives. 
@@ -151,7 +151,7 @@
 
 			<div class="arts-section__container container container--gray">
 				
-				<div class="arts-section__item art-item">
+				<a href='' class="arts-section__item art-item">
 					<div class="art-item__image">
 						<img src="../assets/img/a1.png" alt="">
 					</div>	
@@ -163,15 +163,15 @@
 							<p class="art-item__desc">
 								Structurally, the eyeglasses are a symbolic expression of identity, illusion, perception, fragmentation and unification. 
 							</p>
-							<a class="art-item__button button" href="">
+							<div class="art-item__button button" href="">
 								explore
 								<span class="button__arrow" v-html="btn_arrow"></span>
-							</a>								
+							</div>								
 						</div>
 					</div>
-				</div>
+				</a>
 
-				<div class="arts-section__item art-item">	
+				<a href='' class="arts-section__item art-item">	
 					<div class="art-item__text">
 						<div class="art-item__text-wrap-inner">
 							<div class="art-item__title-wrap">
@@ -189,7 +189,7 @@
 					<div class="art-item__image">
 						<img src="../assets/img/a2.png" alt="">
 					</div>					
-				</div>				
+				</a>				
 				
 			</div>
 			
@@ -212,7 +212,8 @@ import logo from '../assets/img/svg/logo.svg'
 import ins from '../assets/img/svg/in.svg'
 import fb from '../assets/img/svg/fb.svg'
 import menu_close from '../assets/img/svg/menu-close.svg'
-
+import niceScroll from  'jquery.nicescroll'
+// const niceScroll = require('jquery.nicescroll')
 
 let jsonpAdapter = require('axios-jsonp');
 
@@ -256,37 +257,38 @@ export default {
 			header = document.querySelector('.wrapper-header');
 			
 			document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'
-			new SmoothScroll();
-
-			function SmoothScroll(el) {
-			  var t = this, h = document.documentElement;
-			  el = el || window;
-			  t.rAF = false;
-			  t.target = 0;
-			  t.scroll = 0;
-			  t.animate = function() {
-			    t.scroll += (t.target - t.scroll) * 0.05;
-			    if (Math.abs(t.scroll.toFixed(5) - t.target) <= 0.47131) {
-			      cancelAnimationFrame(t.rAF);
-			      t.rAF = false;
-			    }
-			    if (el == window) scrollTo(0, t.scroll);
-			    else el.scrollTop = t.scroll;
-			    if (t.rAF) t.rAF = requestAnimationFrame(t.animate);
-			  };
-			  el.onmousewheel = function(e) {
-			    e.preventDefault();
-			    e.stopPropagation();
-			    var scrollEnd = (el == window) ? h.scrollHeight - h.clientHeight : el.scrollHeight - el.clientHeight;
-			    t.target += (e.wheelDelta > 0) ? -100 : 100;
-			    if (t.target < 0) t.target = 0;
-			    if (t.target > scrollEnd) t.target = scrollEnd;
-			    if (!t.rAF) t.rAF = requestAnimationFrame(t.animate);
-			  };
 			  window.onresize = function() {
 				document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'			  	
-			  }
-			  el.onscroll = function() {
+			  }			
+			// new SmoothScroll();
+
+			// function SmoothScroll(el) {
+			//   var t = this, h = document.documentElement;
+			//   el = el || window;
+			//   t.rAF = false;
+			//   t.target = 0;
+			//   t.scroll = 0;
+			//   t.animate = function() {
+			//     t.scroll += (t.target - t.scroll) * 0.05;
+			//     if (Math.abs(t.scroll.toFixed(5) - t.target) <= 0.47131) {
+			//       cancelAnimationFrame(t.rAF);
+			//       t.rAF = false;
+			//     }
+			//     if (el == window) scrollTo(0, t.scroll);
+			//     else el.scrollTop = t.scroll;
+			//     if (t.rAF) t.rAF = requestAnimationFrame(t.animate);
+			//   };
+			//   el.onmousewheel = function(e) {
+			//     e.preventDefault();
+			//     e.stopPropagation();
+			//     var scrollEnd = (el == window) ? h.scrollHeight - h.clientHeight : el.scrollHeight - el.clientHeight;
+			//     t.target += (e.wheelDelta > 0) ? -100 : 100;
+			//     if (t.target < 0) t.target = 0;
+			//     if (t.target > scrollEnd) t.target = scrollEnd;
+			//     if (!t.rAF) t.rAF = requestAnimationFrame(t.animate);
+			//   };
+
+			  window.onscroll = function() {
 	        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
 
 
@@ -321,21 +323,29 @@ export default {
 			}
 
 
-			    if (t.rAF) return;
-			    t.target = (el == window) ? pageYOffset || h.scrollTop : el.scrollTop;
-			    t.scroll = t.target;
+			    // if (t.rAF) return;
+			    // t.target = (el == window) ? pageYOffset || h.scrollTop : el.scrollTop;
+			    // t.scroll = t.target;
 
 
 
 			  };
-			}
+			// }
 
 
-
+		var menu_count = 0
 	    menu.querySelector('.menu__icons').onclick = function() {
 	    	menu.classList.toggle('menu--open')
-	    	document.querySelector('.header__title').classList.toggle('header__title--change-color')
-	    	console.log(this.should_open)
+	    	if (menu_count === 0) {
+		    	setTimeout(()=>{
+		    		document.querySelector('.header__title').classList.add('header__title--change-color')
+		    	}, 200)	 
+		    	menu_count = 1   		
+	    	}
+	    	else {
+	    		document.querySelector('.header__title').classList.remove('header__title--change-color')
+	    		menu_count = 0
+	    	}
 	    	that.should_open = !that.should_open
 	    };
 
@@ -356,7 +366,12 @@ export default {
 		  })
 		  .catch(function (error) {
 		    console.log(error);
-		  });	    
+		  });	
+
+		      $("body").niceScroll({
+    scrollspeed: 90, // scrolling speed 
+    mousescrollstep: 70,		      	
+		      })
 
 	}
 }

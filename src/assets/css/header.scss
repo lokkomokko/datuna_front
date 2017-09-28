@@ -59,10 +59,12 @@
 		top: 30px;
 		left: 8.70588rem;
 		transition: .3s;
+		// transition-delay: .3s;
 		z-index: 11;
 		&--change-color {
 			color: $gray-4;
-			opacity: 1 !important;		
+			opacity: 1 !important;	
+			transition-delay: none !important;	
 		}
 
 	}

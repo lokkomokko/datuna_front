@@ -4,7 +4,7 @@
     padding: 0 8.70588rem;
 	margin-bottom: 2.47059rem;
 	padding-top: 5rem;
-	z-index: 2;
+	z-index: 0;
 	position: relative;
 	background-color: $bg-color;
 	&__right-side {
@@ -101,7 +101,7 @@
 			}
 		}
 		&-desc {
-
+			padding-right: 30px;
 		}
 	}
 	&__button {
@@ -118,7 +118,7 @@
 			flex-basis: calc(100% / 4);
 			margin-right: 0.117647rem;
 			&-image {
-				height: 17vmax;
+				height: 100%;
 				max-height: 311px;				
 			}
 			&:hover {
@@ -127,6 +127,9 @@
 						transform: none;
 					}
 				}
+			}
+			&-wrap {
+				height: 17vmax;
 			}			
 		}
 	}
@@ -146,6 +149,7 @@
 		top: calc(50% - 125px/2);
 		left: 66%;
 		z-index: 1;
+		pointer-events: none;
 	}
 	&__text-wrap {
 		width: 70%;
@@ -156,6 +160,7 @@
 		margin-bottom: 1.94118rem;
 	}
 	&__image {
+		cursor: default;
 		width: 50%;
 		height: 20vmax;
 		max-height: 315px;
@@ -163,6 +168,7 @@
 		margin-bottom: 2.64706rem;
 		&:after {
 			@extend %image-opacity;
+			cursor: pointer;
 		}
 		img {
 			@extend %img;
@@ -216,9 +222,11 @@
 	display: flex;
 	height: 38.5vmax;
 	max-height: 36.9412rem;	
+	cursor: default;
 	&__image {
 		height: 100%;
 		flex-basis: 50%;
+		cursor: pointer;
 		img {
 			margin-top: -1.35294rem;
 			@extend %img;

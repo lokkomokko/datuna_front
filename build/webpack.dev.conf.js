@@ -36,10 +36,10 @@ module.exports = merge(baseWebpackConfig, {
     }),
     new FriendlyErrorsPlugin(),
     new webpack.ProvidePlugin({
-      $: 'jquery-slim',
-      jquery: 'jquery-slim',
-      'window.jQuery': 'jquery-slim',
-      jQuery: 'jquery-slim',
+      $: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery',
+      jQuery: 'jquery',
       axios: 'axios'
     }),    
   ]
