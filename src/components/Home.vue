@@ -1,34 +1,6 @@
 <template>
 	<!-- start wrap	 -->
 	<div>
-		<!-- menu -->
-		<div class="menu">
-			<div class="menu__icons">
-				<div class="menu__icon-item" v-if="should_open" v-on:click="" v-html="menu"></div>
-				<div class="menu__icon-item-close" v-else v-on:click="" v-html="menu_close"></div>
-				
-			</div>
-
-			
-			<nav class="menu__nav">
-				<a href="" class="menu-item">WORKS</a>
-				<a href="" class="menu-item">SPECIAL PROJECTS</a>
-				<a href="" class="menu-item">FOUNDATION</a>
-				<a href="" class="menu-item">BIO</a>
-				<a href="" class="menu-item">MOVIE</a>
-				<a href="" class="menu-item">MEDIA</a>
-				<a href="" class="menu-item">PRESS</a>
-				<a href="" class="menu-item">SHOP</a>
-				<div class="nav__social">
-					<a href="" class="nav__social-link">
-						<div v-html="fb"></div>
-					</a>
-					<a href="" class="nav__social-link">
-						<div v-html="ins"></div>
-					</a>
-				</div>
-			</nav>
-		</div>
 		<div class="wrapper-header">
 			<!-- sticky top part -->
 			
@@ -42,9 +14,9 @@
 			</header>			
 			
 		</div>		
-		<div class="wrap-f-title">
+<!-- 		<div class="wrap-f-title">
 			<p class="header__title title-usual">DAVID DATUNA</p>			
-		</div>
+		</div> -->
 		<div class="separate-block">
 			<div class="header__bottom-block-wrapper">
 				<div class="header__bottom-block">	
@@ -98,10 +70,10 @@
 					</a>					
 				</div>
 
-				<a class="common-block__button world-section__button button" href="">
+				<router-link to="/news" class="common-block__button world-section__button button" href="">
 					read all news
 					<span class="button__arrow" v-html="btn_arrow"></span>
-				</a>													
+				</router-link>													
 			</section>	
 
 			<section class="foundation">
@@ -145,13 +117,13 @@
 
 			<div class="arts-section__top-separator container">
 				<div class="arts-block__title-wrap">
-					<a href="" class="arts-section__title title-h4">his art.</a>
+					<p class="arts-section__title title-h4">his art.</p>
 				</div>
 			</div>
 
 			<div class="arts-section__container container container--gray">
 				
-				<a href='' class="arts-section__item art-item">
+				<router-link to="/work-page" class="arts-section__item art-item">
 					<div class="art-item__image">
 						<img src="../assets/img/a1.png" alt="">
 					</div>	
@@ -169,9 +141,9 @@
 							</div>								
 						</div>
 					</div>
-				</a>
+				</router-link>
 
-				<a href='' class="arts-section__item art-item">	
+				<a href='' class="arts-section__item arts-section__item-reverse art-item ">	
 					<div class="art-item__text">
 						<div class="art-item__text-wrap-inner">
 							<div class="art-item__title-wrap">
@@ -207,17 +179,11 @@
 // import svg
 import render_svg from '../assets/js/render_svg.js'
 import btn_arrow from '../assets/img/svg/btn-arrow.svg'
-import menu from '../assets/img/svg/menu.svg'
 import logo from '../assets/img/svg/logo.svg'
-import ins from '../assets/img/svg/in.svg'
-import fb from '../assets/img/svg/fb.svg'
-import menu_close from '../assets/img/svg/menu-close.svg'
-import niceScroll from  'jquery.nicescroll'
-// const niceScroll = require('jquery.nicescroll')
 
 let jsonpAdapter = require('axios-jsonp');
 
-let i = 1;
+// let i = 1;
 
 
 
@@ -228,65 +194,34 @@ export default {
 		return {
 			// svg
 			btn_arrow: render_svg(btn_arrow), 
-			menu: render_svg(menu),
 			logo: render_svg(logo),
-			fb: render_svg(fb),
-			ins: render_svg(ins),
-			menu_close: render_svg(menu_close),
 			// insta
 			instagram_data: [],
-			// scroll
-			should_open: true
+
 		}
 	},
   	methods:{
-	    // onScroll:function(e, position){
-	    //   this.position = position;
- 	   // }
+
 	},
 
 	mounted: function() {
-
+			setTimeout(() => {
+				$('body').getNiceScroll().resize()
+			}, 300)
 		// paralax main page top sect	
 		const header_image = document.querySelector('.header__image'),
 			separate_block = document.querySelector('.separate-block'),
 			bottom_block = document.querySelector('.header__bottom-block-wrapper'),
 			that = this,
 			main_wrapper = document.querySelector('#app'),
-			menu = document.querySelector('.menu'),
+			
 			header = document.querySelector('.wrapper-header');
 			
-			document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'
-			  window.onresize = function() {
-				document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'			  	
-			  }			
-			// new SmoothScroll();
-
-			// function SmoothScroll(el) {
-			//   var t = this, h = document.documentElement;
-			//   el = el || window;
-			//   t.rAF = false;
-			//   t.target = 0;
-			//   t.scroll = 0;
-			//   t.animate = function() {
-			//     t.scroll += (t.target - t.scroll) * 0.05;
-			//     if (Math.abs(t.scroll.toFixed(5) - t.target) <= 0.47131) {
-			//       cancelAnimationFrame(t.rAF);
-			//       t.rAF = false;
-			//     }
-			//     if (el == window) scrollTo(0, t.scroll);
-			//     else el.scrollTop = t.scroll;
-			//     if (t.rAF) t.rAF = requestAnimationFrame(t.animate);
-			//   };
-			//   el.onmousewheel = function(e) {
-			//     e.preventDefault();
-			//     e.stopPropagation();
-			//     var scrollEnd = (el == window) ? h.scrollHeight - h.clientHeight : el.scrollHeight - el.clientHeight;
-			//     t.target += (e.wheelDelta > 0) ? -100 : 100;
-			//     if (t.target < 0) t.target = 0;
-			//     if (t.target > scrollEnd) t.target = scrollEnd;
-			//     if (!t.rAF) t.rAF = requestAnimationFrame(t.animate);
-			//   };
+			document.querySelector('.header__title').style.opacity = 1;
+			// document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'
+			//   window.onresize = function() {
+			// 	document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'			  	
+			//   }			
 
 			  window.onscroll = function() {
 	        var scrolled = window.pageYOffset || document.documentElement.scrollTop;
@@ -333,21 +268,7 @@ export default {
 			// }
 
 
-		var menu_count = 0
-	    menu.querySelector('.menu__icons').onclick = function() {
-	    	menu.classList.toggle('menu--open')
-	    	if (menu_count === 0) {
-		    	setTimeout(()=>{
-		    		document.querySelector('.header__title').classList.add('header__title--change-color')
-		    	}, 200)	 
-		    	menu_count = 1   		
-	    	}
-	    	else {
-	    		document.querySelector('.header__title').classList.remove('header__title--change-color')
-	    		menu_count = 0
-	    	}
-	    	that.should_open = !that.should_open
-	    };
+
 
 	    // istagram **********************************
 		var token = '6046807226.dcce32a.395f836a5f3e4026aba6b2c0d4cda79f',
@@ -368,10 +289,7 @@ export default {
 		    console.log(error);
 		  });	
 
-		      $("body").niceScroll({
-    scrollspeed: 90, // scrolling speed 
-    mousescrollstep: 70,		      	
-		      })
+
 
 	}
 }
@@ -380,9 +298,7 @@ export default {
 <style lang="scss">
 	@import "../assets/css/settings.scss";
 
-	body {
-		// background-color: $blue;
-	}
+
 
 </style>
 
