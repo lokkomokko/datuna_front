@@ -26,6 +26,7 @@ body {
 	line-height: 1.4rem;
 	color: $gray-1;
 	background-color: $bg-color;
+    backface-visibility: hidden;
 }
 
 .main-wrapper, .header, .header__bottom-block-wrapper, .wrap-f-title{
@@ -33,9 +34,12 @@ body {
 	width: 100%;
 	margin: 0 auto;
 }
+.fancybox-enabled {
+	overflow: auto !important;
+}
 // imports site part
 @import 'header';
 @import 'category-page';
 @import 'page-1';
-@import 'media';
 @import 'work-page';
+@import 'media';

@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="body-wrapper">
     <div id="app" class="main-wrapper">
       <menuTemplate></menuTemplate>
+        <div class="mobile-bg"></div>
         <transition>
           <router-view></router-view>
         </transition>   
@@ -22,17 +23,32 @@ export default {
   name: 'app',
   mounted: function() {
   	
-		      $("body").niceScroll({
-				    scrollspeed: 90, // scrolling speed 
-				    mousescrollstep: 70,		      	
-		      })  	
-          $('body').getNiceScroll().resize()
+		      // $("body").niceScroll({
+				    // scrollspeed: 90, // scrolling speed 
+				    // mousescrollstep: 70,		      	
+		      // })  	
+    
+
+        //   $('body').getNiceScroll().resize()
 
   },
   components: {
   	menuTemplate,
     Footer_component
   },  
+  watch: {
+    '$route' (to, from) {
+        if (to.name == 'New_page' || to.name == 'Work_page' ) {
+
+        }
+        else {
+          setTimeout(()=>{
+            window.scrollTo(0, 0)
+          }, 300)          
+        }
+
+    }
+  }
 }
 </script>
 

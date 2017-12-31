@@ -10,79 +10,71 @@
 					<div class="arts-block__links-wrap">
 						<div class="arts-block__link-item"
 							v-scroll-to="{
-						     el: '#make',
+						     el: '#_'+item.id,
 						     duration: 1500,
 						     offset: -30}"
-						 >MAKE AMERICA STRONGER TOGETHER</div>
-						<div class="arts-block__link-item"
-							v-scroll-to="{
-							     el: '#shall',
-							     duration: 1500,
-							     offset: -30}"
+						     v-for="item in data"
+						 >{{item.title}}</div>
 
-						>THIS TOO SHALL PASS</div>
-						<div class="arts-block__link-item"
-							v-scroll-to="{
-							     el: '',
-							     duration: 1500,
-							     offset: -30}"
-						>PROJECT 3</div>
-						<div class="arts-block__link-item"
-							v-scroll-to="{
-							     el: '#portraits-block',
-							     duration: 1500,
-							     offset: -30}"
-						>PROJECT 4</div>						
 					</div>
 				</div>
 			</div>
 
 			<div class="arts-section__container container container--gray">
-				
-				<router-link to="/special-project" class="arts-section__item art-item" id="make">
-					<div class="art-item__image">
-						<img src="../assets/img/n2.png" alt="">
-					</div>	
+
+				<router-link :to="{ name: 'Special_project', params: { projId: item.id }}" :class="index % 2 ? 'arts-section__item arts-section__item-reverse art-item' : 'arts-section__item art-item'" :id="'_'+item.id" v-for="(item, index) in data" :key="item.id">
+				<template v-if="index % 2">
 					<div class="art-item__text">
 						<div class="art-item__text-wrap-inner">
 							<div class="art-item__title-wrap">
-								<h4 class="art-item__title title-h4">MAKE AMERICA STRONGER TOGETHER</h4>
+								<h4 class="art-item__title title-h4">{{item.title}}</h4>
 							</div>
 							<p class="art-item__desc">
-								Structurally, the eyeglasses are a symbolic expression of identity, illusion, perception, fragmentation and unification. 
+								{{item.desc_main}}
 							</p>
-							<div class="art-item__button button" href="">
-								explore
+							<div class="art-item__button button">
+								more
 								<span class="button__arrow" v-html="btn_arrow"></span>
-							</div>								
+							</div>
 						</div>
 					</div>
+					<div class="art-item__image preloader">
+						<img :src="item.image" alt="">
+            <div class="spin-wrapper spin-wrapper--work">
+              <div class="spin"></div>
+            </div>
+					</div>
+				</template>
+				<template v-else>
+
+					<div class="art-item__image preloader">
+						<img :src="item.image" alt="">
+            <div class="spin-wrapper spin-wrapper--work">
+              <div class="spin"></div>
+            </div>
+
+					</div>
+					<div class="art-item__text">
+						<div class="art-item__text-wrap-inner">
+							<div class="art-item__title-wrap">
+								<h4 class="art-item__title title-h4">{{item.title}}</h4>
+							</div>
+							<p class="art-item__desc">
+								{{item.desc_main}}
+							</p>
+							<div class="art-item__button button" >
+								more
+								<span class="button__arrow" v-html="btn_arrow"></span>
+							</div>
+						</div>
+					</div>
+				</template>
 				</router-link>
 
-				<a href='' class="arts-section__item arts-section__item-reverse art-item" id="shall">	
-					<div class="art-item__text">
-						<div class="art-item__text-wrap-inner">
-							<div class="art-item__title-wrap">
-								<h4 class="art-item__title title-h4">PORTRAITS</h4>
-							</div>
-							<p class="art-item__desc">
-								Structurally, the eyeglasses are a symbolic expression of identity, illusion, perception, fragmentation and unification. 
-							</p>
-							<a class="art-item__button button" href="">
-								explore
-								<span class="button__arrow" v-html="btn_arrow"></span>
-							</a>								
-						</div>
-					</div>
-					<div class="art-item__image">
-						<img src="../assets/img/sp1.png" alt="">
-					</div>					
-				</a>
 
-								
-				
+
 			</div>
-			
+
 		</section>
 	</div>
 </template>
@@ -91,18 +83,47 @@
 
 import render_svg from '../assets/js/render_svg.js'
 import btn_arrow from '../assets/img/svg/btn-arrow.svg'
+import domain from '../assets/js/config.js'
+var imagesLoaded = require('imagesloaded')
 	export default {
 		data() {
 			return {
-				btn_arrow: render_svg(btn_arrow), 
+				btn_arrow: render_svg(btn_arrow),
+				data: {}
 			}
 		},
 		name: 'Special_projects',
+		created: function() {
+
+
+			const self = this
+			document.title = "Special projects. David Datuna";
+
+			axios.get(domain +'api/projects')
+			  .then(function (response) {
+			  		self.data = response.data
+			  		self.data.map((e)=> {
+				  		e.image = domain + 'images/'+ e.image
+			  		})
+
+			  })
+			  .catch(function (error) {
+
+			    console.log(error);
+			  });
+		},
+    watch: {
+      data : function() {
+        imagesLoaded(document.querySelectorAll('.art-item__image img'), function(e) {
+          $('.art-item__image').removeClass('preloader')
+        })
+      },
+    },
 		mounted: function() {
-			setTimeout(() => {
-				$('body').getNiceScroll().resize()
-				console.log(3232323);
-			}, 500)
+			// setTimeout(() => {
+			// 	$('body').getNiceScroll().resize()
+			// 	console.log(3232323);
+			// }, 500)
 
 
 			const header_title = document.querySelector('.header__title')
@@ -117,7 +138,7 @@ import btn_arrow from '../assets/img/svg/btn-arrow.svg'
 
 				if (scrolled >= 50) {
 					header_title.style.opacity = 0
-				}			
+				}
 				else {
 					header_title.style.opacity = 1
 				}

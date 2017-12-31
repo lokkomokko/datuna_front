@@ -1,74 +1,79 @@
 <template>
 	<div>
-		<section class="work-page__container work-page__container-for-page container">
-			<div class="work-page__breadcrumbs-wrap work-page__breadcrumbs-wrap-for-page">
-				<a href="" class="work-page__breadcrumbs-item link-2">media</a>
-				<span class="button__arrow" v-html="btn_arrow"></span>
-				<a href="" class="work-page__breadcrumbs-item link-2">video</a>
+		<section class="arts-section arts-section--works">
+
+			<div class="arts-section__top-separator container">
+				<div class="arts-block__title-wrap">
+					<router-link to="/media" class="arts-section__title title-h4">media/<br><span class="cat-page__name">video</span></router-link>
+				</div>
 			</div>
 
-			<div class="gallery__desc-wrap">
-				<h3 class="gallery__desc">
-					New book’s presentation at the White House
-				</h3>				
-			</div>	
-
-			<div class="gallery__item-wrap">
-				<a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="gallery__item" data-fancybox="gallery">
-					<img src="https://img.youtube.com/vi/Q0CbN8sfihY/0.jpg" alt="">
-				</a>
-				<a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="gallery__item" data-fancybox="gallery">
-					<img src="https://img.youtube.com/vi/Q0CbN8sfihY/0.jpg" alt="">
-				</a>
-				<a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="gallery__item" data-fancybox="gallery">
-					<img src="https://img.youtube.com/vi/Q0CbN8sfihY/0.jpg" alt="">
-				</a>	
-				<a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="gallery__item" data-fancybox="gallery">
-					<img src="https://img.youtube.com/vi/Q0CbN8sfihY/0.jpg" alt="">
-				</a>
-				<a href="https://www.youtube.com/watch?v=Q0CbN8sfihY" class="gallery__item" data-fancybox="gallery">
-					<img src="https://img.youtube.com/vi/Q0CbN8sfihY/0.jpg" alt="">
-				</a>
-							
-			</div>
-					
+			<div class="page__container container container--gray">
 				
+				<div class="common-block__item-wrap common-block__item-wrap-for-page">
+					<a :href="'https://www.youtube.com/' + item.preview" class="common-block__item common-block__item-for-page" v-for="(item, index) in data" :key="index">
+						<div class="common-block__item-image common-block__no-hover">
+							<img class="common-block__item-videos-image" :src="'https://img.youtube.com/vi/' + item.preview + '/0.jpg'" alt="" >
+						</div>
+						<h5 class="common-block__item-desc">
+							{{item.title}}
+						</h5>
+					</a>														
+																	
+				</div>
+							
+				
+			</div>
+			
 		</section>
-		<div class="work-page__buttons container">
-			<div class="button button--reverse" href="">
-				<span class="button__arrow" v-html="btn_arrow"></span>
-				previous
-			</div>				
-			<div class="button" href="">
-				next
-				<span class="button__arrow" v-html="btn_arrow"></span>
-			</div>				
-		</div>
-
 	</div>
 </template>
 
 <script>
-
 require('../../static/js/jquery.fancybox.min.js')
 import render_svg from '../assets/js/render_svg.js'
 import btn_arrow from '../assets/img/svg/btn-arrow.svg'
+import domain from '../assets/js/config.js'
+let jsonpAdapter = require('axios-jsonp');
+import _ from 'lodash'
+
 	export default {
 		data() {
 			return {
 				btn_arrow: render_svg(btn_arrow), 
+				data: {},
+
 			}
 		},
 		name: 'Video',
-		mounted: function() {
-			setTimeout(() => {
-				$('body').getNiceScroll().resize()
-			}, 500)
+		created: function() {
+		
+			const self = this
+			document.title = "Videos. David Datuna";
+			axios.get(domain +'api/media?type=video')
 
-			$('.gallery__item').fancybox({
-				scrolling: false,
-				width: 199
-			});
+			  .then(function (response) {
+
+			  		self.data = response.data
+			  		for (const item of self.data) {
+			  			item.preview = item.preview.replace(/\b&[^...]*/, '')
+							  			
+			  		}
+						  
+
+
+			  })
+			  .catch(function (error) {
+			    console.log(error);
+			  });
+		},			
+		mounted: function() {
+
+
+			setTimeout(() => {
+				$('.common-block__item').fancybox();
+			}, 500)
+				
 
 			const header_title = document.querySelector('.header__title')
 			const work_section = document.querySelector('.arts-section--works')

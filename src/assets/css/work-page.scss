@@ -1,6 +1,8 @@
 .work-page {
 
-
+	&__btn-next {
+		margin-left: auto;
+	}
 	&__breadcrumbs-wrap {
 		display: flex;
 		align-items: center;
@@ -18,13 +20,22 @@
 		}
 	}
 	&__container {
-		margin-top: 200px;
+		margin-top: 201px;
 		display: flex;
 		background: #fff;
 		box-sizing: border-box;
 		padding: 0 0 5.88235rem 0;
 		margin-bottom: 4.11765rem;
 		position: relative;
+		&--foundation-page {
+			background-color: $gray-4;
+			// padding-left: 93px;
+			flex-wrap: wrap;
+			padding-bottom: 0;
+		}
+		&--for-foundation {
+			padding-bottom: 1.47059rem;
+		}
 		&-for-page {
 			padding: 50px 107px 85px;
 			box-sizing: border-box;
@@ -32,23 +43,42 @@
 		}
 	}
 	&__col {
-		flex-basis: 50%;
+		
 
 		&:first-of-type {
 			padding-left: 6.76471rem;
 			box-sizing: border-box;
+			flex-basis: 60%;
 		}
 		&:last-of-type {
 			padding-right: 1.58824rem;
 			box-sizing: border-box;
+			flex-basis: 40%;
 		}
+		&.work-page__col-foundation {
+			// padding-left: 0;
+			padding-left: 93px;
+		}
+		&--big {
+			&:last-of-type {
+				flex-basis: 50% ;
+				padding-left: 0;
+			}
+		}
+		&--small {
+			&:first-of-type {
+			flex-basis: 50% ;
+			// padding-right: 30px;
+
+			}
+		}		
 	}
 	&__text-wrap {
 		margin-top: 4.11765rem;
 		max-width: 400px;
 		position: relative;
 		&--single-project {
-			max-width: 472px;
+			max-width: 600px;
 		}
 	}
 	&__title {
@@ -60,7 +90,7 @@
 		display: inline-block;
 		position: relative;
 		margin-bottom: 2.23529rem;
-		max-width: 300px;
+		// max-width: 300px;
 		&-for-page {
 			padding-bottom: 0;
 			margin-bottom: 1.76471rem;
@@ -79,6 +109,20 @@
 		    width: 4.05882rem;
 		    background-color: $gray-4;			
 		}
+	}
+	&__desc {
+	    // margin-left: 12px;
+		a {
+			border-bottom: $blue 1px solid;
+			&:hover {
+				border-color: transparent;
+				color: $blue;
+			} 			
+		}
+		p {
+		    padding-bottom: 1rem;
+		}
+
 	}
 	&__desc-date {
 		color: $gray-1;
@@ -107,6 +151,7 @@
 	&__slide-item {
 		margin-right: 12px;
 		height: 100px;
+		flex-basis: calc(100% / 4);
 		img {
 			@extend %img;
 		}

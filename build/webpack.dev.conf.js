@@ -7,6 +7,7 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -41,6 +42,16 @@ module.exports = merge(baseWebpackConfig, {
       'window.jQuery': 'jquery',
       jQuery: 'jquery',
       axios: 'axios'
-    }),    
+    }), 
+    new BrowserSyncPlugin({
+      // browse to http://localhost:3000/ during development,
+      // ./public directory is being served
+      host: 'localhost',
+      port: 3000,
+      proxy: 'localhost:8080',
+    }, {
+      reload: false,
+      name: 'portfolio',
+    }),       
   ]
 })

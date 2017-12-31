@@ -16,18 +16,18 @@
 			<nav class="menu__nav">
 				<router-link to="/works" class="menu-item">WORKS</router-link>	
 				<router-link to="/special-projects" class="menu-item">SPECIAL PROJECTS</router-link>
-				<router-link to="/special-projects" class="menu-item">FOUNDATION</router-link>
-				<router-link to="/foundation" class="menu-item">BIO</router-link>
+				<!-- <router-link to="/foundation" class="menu-item">FOUNDATION</router-link> -->
+				<router-link to="/bio" class="menu-item">BIO</router-link>
 				<router-link to="/movie" class="menu-item">MOVIE</router-link>
 				<router-link to="/media" class="menu-item">MEDIA</router-link>
-				<router-link to="/press" class="menu-item">PRESS</router-link>
-				<router-link to="/shop" class="menu-item">SHOP</router-link>	
+				<router-link to="/news" class="menu-item">PRESS</router-link>
+				<!-- <a href="http://shoplink.com" class="menu-item" target="_blank">SHOP</a>	 -->
 
 				<div class="nav__social">
-					<a href="" class="nav__social-link">
+					<a href="https://www.facebook.com/ddatuna" target="_blank" class="nav__social-link">
 						<div v-html="fb"></div>
 					</a>
-					<a href="" class="nav__social-link">
+					<a href="https://www.instagram.com/david_datuna/" target="_blank" class="nav__social-link">
 						<div v-html="ins"></div>
 					</a>
 				</div>
@@ -96,7 +96,15 @@ import menu_close from '../assets/img/svg/menu-close.svg'
 			document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'
 			  window.onresize = function() {
 				document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'			  	
-			  }		    
+			  }	
+
+		$(document).on('click', function(e) {
+			if ($(e.target).closest('.menu').length === 0) {
+				$('.menu').removeClass('menu--open')
+				that.should_open = true
+				
+			}
+		})	    
 
 	  }
 

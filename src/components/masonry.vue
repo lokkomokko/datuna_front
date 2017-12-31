@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<div>
 		<section class="arts-section arts-section--works arts-section--cat">
 
@@ -16,17 +16,14 @@
 			</div>
 
 			<div class="cat-page__container container container--white"   >
-				<!-- <div class=""> -->
-				<!-- <div id="test"></div> -->
-				<!-- <div id="test2"></div> -->
+				<div class="cat-page__masonry-wrapper" v-masonry transition-duration="0.3s" item-selector=".cat-page__item"  fit-width="false" gutter="#test"  column-width="#test2">
+				<div id="test"></div>
+				<div id="test2"></div>
 				
-					<router-link :to="{name: 'Work_page', params : {workId: item.id, workName: cat_id.category_name} }" class="cat-page__item cat-page__item--preloader" v-for="item in data.works" :key="item.id">
+					<router-link  v-masonry-tile :to="{name: 'Work_page', params : {workId: item.id, workName: cat_id.category_name} }" class="cat-page__item" v-for="item in data.works" :key="item.id">
 					<img :src="item.image" alt="" class="cat-page__item-img">
-					<div class="spin-wrapper spin-wrapper--work-cat">
-						<div class="spin"></div>
-					</div>
-					</router-link>
-				<!-- </div> -->
+				</router-link>
+				</div>
 				
 			</div>
 
@@ -82,43 +79,28 @@ var imagesLoaded = require('imagesloaded')
 			  		self.all_cat = self.data.all_cat
 					const grid = document.querySelector('.cat-page__container')
 
-					// var pre = imagesLoaded($('.cat-page__container img')) 
-					// pre.on('always', function(e) {
-					// 	// $('.cat-page__container img').on('load', function() {
-					// 		// $('.cat-page__item').removeClass('cat-page__item--preloader')
-					// 	// })
-					// console.log(e)
-
-							
-					// })
-
-					document.title = self.cat_id.category_name+". David Datuna";		  		
+						// imagesLoaded( document.querySelector('.cat-page__container'), function( instance ) {
+						// 	const msnry = new Masonry(document.querySelector('.cat-page__container'), {
+						// 	  itemSelector: '.cat-page__item',
+						// 	  // columnWidth: '.cat-page__item'
+						// 	})
+						// });			  		
 			  })
 			  .catch(function (error) {
-			  	// window.location.href = '/404'
-
 			    console.log(error);
 			  });
 		},
-		updated: function() {
-			  this.$nextTick(function () {
-			    console.log(this.data, '[eq');
-			  })			
-			
-			imagesLoaded(document.querySelectorAll('.cat-page__container img'), function(e) {
-				$('.cat-page__item').removeClass('cat-page__item--preloader')
-			})
-
-		},
+		methods: {
+  msnry: function(){
+    this.$redrawVueMasonry();
+	}
+	},
 		watch: {
 		   	'$route' (to, from) {
 				
 				const self = this
 
-				$('.cat-page__item').addClass('cat-page__item--preloader')
-
 				axios.get(domain +'api/works?type=cat_page&cat_name='+ self.$route.params.workName)
-
 
 				  .then(function (response) {
 				  		self.data = response.data;
@@ -128,15 +110,13 @@ var imagesLoaded = require('imagesloaded')
 
 				  		self.cat_id = self.data.cat_id
 				  		self.all_cat = self.data.all_cat
+				  		imagesLoaded( document.querySelector('.cat-page__container'), function( instance ) {
+				  			self.msnry()
 
-						
-				  		
-				  		document.title = self.cat_id.category_name.substr(0, 1).toUpperCase()+self.cat_id.category_name.substr(1)+". David Datuna";	
+				  		})
 
 				  })
 				  .catch(function (error) {
-				  	window.location.href = '/404'
-				  	
 				    console.log(error);
 				  });
 		    }
@@ -191,3 +171,4 @@ var imagesLoaded = require('imagesloaded')
 	}
 </script>
 
+ -->

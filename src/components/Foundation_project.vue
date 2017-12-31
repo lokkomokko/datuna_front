@@ -5,44 +5,38 @@
 			<div class="work-page__col work-page__col--text">
 				<div class="work-page__text-wrap work-page__text-wrap--single-project">
 					<div class="work-page__breadcrumbs-wrap">
-						<router-link to="/special-projects" class="work-page__breadcrumbs-item link-2">SPECIAL PROJECTS</router-link>
-
-					</div>
-					<div class="work-page__title-wrap">
-						<h1 class="work-page__title title-h1">{{title}}</h1>
-					</div>
-					<div class="work-page__desc" v-html="desc">
-					</div>
-				</div>
-			</div>
-			<div class="work-page__col work-page__col--image work-page__col--preloader ">
-						<img :src="image" alt="" class="work-page__image">
-        <div class="spin-wrap">
-          <div class="spin"></div>
-        </div>
-				<template v-if="data.images_group">
-					<div class="work-page__slide-wrap" >
-
-						<a :href="item.image" class="work-page__slide-item" v-for="item in data.images_group">
-							<img :src="item.image" alt="">
-						</a>
-
-
-					</div>
-
-					<div class="work-page__more-photos-wrap">
-						<router-link :to="{ name: 'Gallery', params: { photoId: relate_photos }}" class="work-page__more-photos-link link-2">
-							more photos
-						</router-link>
+						<router-link to="/foundation" class="work-page__breadcrumbs-item link-2">foundation</router-link>
 						<span class="button__arrow" v-html="btn_arrow"></span>
+						<router-link to="/foundation/projects" class="work-page__breadcrumbs-item link-2">projects</router-link>
+					</div>				
+					<div class="work-page__title-wrap">
+						<h1 class="work-page__title title-h1">{{data.title}}</h1>						
 					</div>
-				</template>
+					<div class="work-page__desc" v-html="data.text"></div>					
+				</div>
+			</div>				
+			<div class="work-page__col work-page__col--image">
+						<img :src="data.image" alt="" class="work-page__image">
+						<template v-if="data.images_group">
+							<div class="work-page__slide-wrap">
 
-			</div>
+								<a :href="item.image" class="work-page__slide-item" v-for="item in data.images_group">
+									<img :src="item.image" alt="">
+								</a>
+													
+																	
+							</div>
+
+							<div class="work-page__more-photos-wrap">
+								<router-link :to="{ name: 'Gallery', params: { photoId: data.relate_media_photos }}" class="work-page__more-photos-link link-2">
+									more photos
+								</router-link>
+								<span class="button__arrow" v-html="btn_arrow"></span>
+							</div>
+						</template>
+			</div>				
 		</section>
-
-
-
+	
 		<div class="related-news container">
 			<div class="related-news__title title-h4">
 				Related news:
@@ -56,8 +50,9 @@
 							{{item.title}}
 						</h5>
 					</router-link>
-				</div>
-		</div>
+				</div>				
+		</div>	
+			
 
 	</div>
 </template>
@@ -68,26 +63,21 @@ require('../../static/js/jquery.fancybox.min.js')
 import render_svg from '../assets/js/render_svg.js'
 import btn_arrow from '../assets/img/svg/btn-arrow.svg'
 import domain from '../assets/js/config.js'
-var imagesLoaded = require('imagesloaded')
 
 	export default {
 		data() {
 			return {
-				btn_arrow: render_svg(btn_arrow),
-				data: {} ,
-				title: '',
-				image: '',
-				desc: '',
-				relate_photos: '',
-				preview: 0,
+				btn_arrow: render_svg(btn_arrow), 
+				data: {},
+				preview: 0
 			}
 		},
-		name: 'Special_project',
+		name: 'Foundation_project',
 		created: function() {
 
 			const self = this
 
-			var api_adress = this.$route.query.preview ? domain +'api/projects?preview=true&id=' + this.$route.query.id : domain +'api/projects?id=' + self.$route.params.projId
+			var api_adress = this.$route.query.preview ? domain +'api/foundation?preview=true&type=project&id='+ self.$route.query.id : domain +'api/foundation?type=project&id='+ self.$route.params.projId
 
 			if (this.$route.query.session) {
 				api_adress = domain +'api/session'
@@ -96,65 +86,49 @@ var imagesLoaded = require('imagesloaded')
 			axios.defaults.withCredentials = true;
 			axios.get(api_adress)
 
+
+			
+
 			  .then(function (response) {
-			  		self.data = response.data
-			  		console.log(self.data)
-			  		// self.data.image = domain + self.data.image
+			  		self.data = response.data;
+
 			  		if (self.preview == 0) {
+				  		self.data.image = domain + 'images/'+ self.data.image 
+				  		self.data.news.map((e)=> {
+					  		e.image = domain + '/images/thumb/' + e.image
+				  		})					  		
 				  		self.data.images_group.map((e)=> {
 					  		e.image = domain + e.image
 				  		})
-				  		self.data.news.map((e)=> {
-					  		e.image = domain + '/images/thumb/' + e.image
-				  		})
-				  		self.relate_photos = self.data.proj[0].photos_relate
-				  		self.desc = self.data.proj[0].desc
-				  		self.title = self.data.proj[0].title
-				  		self.image = domain + 'images/' + self.data.proj[0].image
-
-
 				  		if (self.data.images_group == self.data.images_group.length) {
 				  			delete(self.data.images_group)
 				  		}
 			  		}
 			  		else {
-
-				  		self.desc = self.data.SpecialProjects.desc
-				  		self.title = self.data.SpecialProjects.title
-				  		self.image = domain + self.data.p_image
+				  		self.data.title = self.data.News.title;
+				  		self.data.text = self.data.News.text;
+				  		self.data.image = domain + self.data.p_image;
 			  		}
 
-
-					document.title = self.title+". David Datuna";
-
-
-
+			  		document.title = self.data.title+". David Datuna";
 
 			  })
 			  .catch(function (error) {
 			    console.log(error);
 			  	window.location.href = '/404'
-
+			    
 			  });
-		},
-    watch: {
-      data : function() {
-        imagesLoaded(document.querySelector('.work-page__col--image img'), function(e) {
-          $('.work-page__col--image').removeClass('work-page__col--preloader')
-        })
-      },
-    },
+		},		
 		mounted: function() {
 			setTimeout(() => {
-			 $('.work-page__slide-item').fancybox();
-
+				$('.work-page__slide-item').fancybox();
 			}, 500)
-      $('.spin-wrap').height($('.work-page__image').height())
-      if ($(window).width() < 785 && $(window).width() > 585) {
+
+			if ($(window).width() < 785 && $(window).width() > 585) {
 				setTimeout(function() {
 
 					var el_1 = $('.work-page__col--text')
-					var el_2 = $('.work-page__col--image')
+					var el_2 = $('.work-page__col--image')					
 					var clone = el_2.clone()
 					el_2.hide()
 					el_1.find('.work-page__desc').prepend(clone)
@@ -171,17 +145,17 @@ var imagesLoaded = require('imagesloaded')
 				}, 500)
 			}
 			// var el_1 = $('.work-page__col:first-of-type')
-			// var el_2 = $('.work-page__col:last-of-type')
-			// var wrap = $('.work-page__image')
-			// var text = $('.work-page__desc')
+			// var el_2 = $('.work-page__col:last-of-type')	
+			// var wrap = $('.work-page__image') 
+			// var text = $('.work-page__desc')			
 			$(window).resize(()=>{
-				if (this.$route.name == 'Special_project') {
+				if (this.$route.name == 'Foundation_project') {
 					if ($(window).width() <= 585) {
 
 					if ($('.work-page__col--tablet-image').length  >= 1) {
 						var el_1 = $('.work-page__col--text')
-						var el_2 = $('.work-page__col--image')
-						$('.work-page__col--tablet-image').remove()
+						var el_2 = $('.work-page__col--image')	
+						$('.work-page__col--tablet-image').remove()				
 						el_2.show()
 
 				$('.work-page__col--image').append($('.work-page__desc'))
@@ -189,8 +163,8 @@ var imagesLoaded = require('imagesloaded')
 
 						// el_1.find('.work-page__desc').prepend(clone)
 					}
-
-					}
+	
+					}		
 					else if ($(window).width() > 585 && $(window).width() < 785 ) {
 
 					if ($('.work-page__col--tablet-image').length  == 0) {
@@ -198,30 +172,30 @@ var imagesLoaded = require('imagesloaded')
 						var el_2 = $('.work-page__col--image')
 
 						$('.work-page__text-wrap').after($('.moved_work'))
-						$('.moved_work').removeClass('moved_work')
+						$('.moved_work').removeClass('moved_work')											
 
 						var clone = el_2.clone()
 						el_2.hide()
 						el_1.find('.work-page__desc').prepend(clone)
 						$('.work-page__slide-item').fancybox();
-						clone.addClass('work-page__col--tablet-image')
+						clone.addClass('work-page__col--tablet-image')						
 					}
-
-					}
-					else if ($(window).width() >= 785) {
+			
+					}				
+					else if ($(window).width() >= 785) { 
 						if ($('.work-page__col--tablet-image').length  >= 1) {
 									var el_1 = $('.work-page__col--text')
-									var el_2 = $('.work-page__col--image')
-									$('.work-page__col--tablet-image').remove()
+									var el_2 = $('.work-page__col--image')	
+									$('.work-page__col--tablet-image').remove()				
 									el_2.show()
 
-
+						
 
 									// el_1.find('.work-page__desc').prepend(clone)
-								}
+								}						
 					}
 				}
-			})
+			})	 
 
 			const header_title = document.querySelector('.header__title')
 			const work_section = document.querySelector('.arts-section--works')
@@ -235,7 +209,7 @@ var imagesLoaded = require('imagesloaded')
 
 				if (scrolled >= 50) {
 					header_title.style.opacity = 0
-				}
+				}			
 				else {
 					header_title.style.opacity = 1
 				}
