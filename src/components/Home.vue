@@ -3,26 +3,26 @@
 	<div>
 		<div class="wrapper-header">
 			<!-- sticky top part -->
-			
+
 			<header class="header">
-											
+
 				<div class="header__image-wrap">
 					<picture>
 						<source media="(max-width: 500px)" :srcset="domain + 'images/thumb/' + main_image">
 						<img class="header__image" :src="domain + 'images/' + main_image" alt="">
-					</picture>				
+					</picture>
 					<div class="header__logo" v-html="logo"></div>
-				</div>				
+				</div>
 				<div class="header__empty-block"></div>
-			</header>			
-			
-		</div>		
+			</header>
+
+		</div>
 <!-- 		<div class="wrap-f-title">
-			<p class="header__title title-usual">DAVID DATUNA</p>			
+			<p class="header__title title-usual">DAVID DATUNA</p>
 		</div> -->
 		<div class="separate-block">
 			<div class="header__bottom-block-wrapper">
-				<div class="header__bottom-block">	
+				<div class="header__bottom-block">
 					<a href="" class="header__bottom-block-title  title-h4" v-scroll-to="{
      el: '.separate-block',
      duration: 1500}" >HIS WORLD.</a> <br>
@@ -31,18 +31,18 @@
      duration: 1500,
       offset: -130,}" >HIS ART.</a>
 					<p class="header__bottom-block-scroll small-text">scroll down</p>
-				</div>					
-			</div>	
+				</div>
+			</div>
 			<div class="separate-block__right-site">
 				<p class="separate-block__text">{{desc_main}}</p> <br>
 				<router-link class="button" to="/bio">
 					more
 					<span class="button__arrow" v-html="btn_arrow"></span>
-				</router-link>				
+				</router-link>
 
 			</div>
 		</div>
-		
+
 		<div class="world-section container container--gray">
 			<section class="common-block common-block_news">
 				<div class="common-block__mobile-sep title-h4">
@@ -61,14 +61,14 @@
 						</h5>
 					</router-link>
 
- 
+
 				</div>
 
 				<router-link to="/news" class="common-block__button world-section__button button">
 					more
 					<span class="button__arrow" v-html="btn_arrow"></span>
-				</router-link>													
-			</section>	
+				</router-link>
+			</section>
 
 			<section class="sp-index">
 				<h2 class="common-block__title title-h2">special projects</h2>
@@ -84,50 +84,50 @@
 						</h5>
 					</router-link>
 
- 
+
 				</div>
 
 				<router-link to="/special-projects" class="common-block__button world-section__button button">
 					more
 					<span class="button__arrow" v-html="btn_arrow"></span>
-				</router-link>					
+				</router-link>
 			</section>
 
 
 <!-- 			<section class="foundation">
-				
+
 				<router-link to="/foundation" class="foundation__image">
 					<h2 class="foundation__title title-h2">foundation</h2>
 					<img :src="found_image" alt="">
 				</router-link>
 				<div class="foundation__text-wrap">
 					<div class="foundation__text" v-html="found_desc">
-						 
+
 					</div>
 					<router-link to="/foundation" class="foundation__button world-section__button button" href="">
 						more
 						<span class="button__arrow" v-html="btn_arrow"></span>
-					</router-link>					
-				</div>				
-
-			</section> -->
-			
-			<section class="common-block common-block_instagram">
-			
-				<h2 class="common-block__title title-h2">INSTAGRAM</h2>
-				<div class="common-block__item-wrap">
-					<a target="_blank" v-for="(item, index) in instagram_data" :href="item.link" class="common-block__item" :key="index">
-						<div class="common-block__item-image">
-							<img :src="item.images.low_resolution.url" alt="" >
-						</div>
-					</a>					
+					</router-link>
 				</div>
 
-				<a class="common-block__button world-section__button button" href="https://www.instagram.com/david_datuna/">
-					more
-					<span class="button__arrow" v-html="btn_arrow"></span>
-				</a>													
-			</section>
+			</section> -->
+
+			<!--<section class="common-block common-block_instagram">-->
+			<!---->
+				<!--<h2 class="common-block__title title-h2">INSTAGRAM</h2>-->
+				<!--<div class="common-block__item-wrap">-->
+					<!--<a target="_blank" v-for="(item, index) in instagram_data" :href="item.link" class="common-block__item" :key="index">-->
+						<!--<div class="common-block__item-image">-->
+							<!--<img :src="item.images.low_resolution.url" alt="" >-->
+						<!--</div>-->
+					<!--</a>					-->
+				<!--</div>-->
+
+				<!--<a class="common-block__button world-section__button button" href="https://www.instagram.com/david_datuna/">-->
+					<!--more-->
+					<!--<span class="button__arrow" v-html="btn_arrow"></span>-->
+				<!--</a>													-->
+			<!--</section>-->
 
 		</div>
 
@@ -140,7 +140,7 @@
 			</div>
 
 			<div class="arts-section__container container container--gray">
-				
+
 				<router-link :to="{ name: 'Works_categories', params: { workName: (item.category_name).toLowerCase(), workId: item.title }}" :class="index % 2 ? 'arts-section__item arts-section__item-reverse art-item' : 'arts-section__item art-item'" v-for="(item, index) in data.works" :key="index">
 				<template v-if="index % 2">
 					<div class="art-item__text">
@@ -154,18 +154,18 @@
 							<div class="art-item__button button" href="">
 								more
 								<span class="button__arrow" v-html="btn_arrow"></span>
-							</div>								
+							</div>
 						</div>
-					</div>	
+					</div>
 					<div class="art-item__image">
 						<img :src="item.image" alt="">
-					</div>				
+					</div>
 				</template>
 				<template v-else>
 
 					<div class="art-item__image">
 						<img :src="item.image" alt="">
-					</div>	
+					</div>
 					<div class="art-item__text">
 						<div class="art-item__text-wrap-inner">
 							<div class="art-item__title-wrap">
@@ -177,16 +177,16 @@
 							<div class="art-item__button button" href="">
 								more
 								<span class="button__arrow" v-html="btn_arrow"></span>
-							</div>								
+							</div>
 						</div>
-					</div>										
+					</div>
 				</template>
 				</router-link>
 
 	<!-- arts-section__item-reverse art-item				 -->
-				
+
 			</div>
-			
+
 		</section>
 
 
@@ -216,7 +216,7 @@ export default {
 	data () {
 		return {
 			// svg
-			btn_arrow: render_svg(btn_arrow), 
+			btn_arrow: render_svg(btn_arrow),
 			logo: render_svg(logo),
 			// insta
 			instagram_data: [],
@@ -235,14 +235,14 @@ export default {
 	created: function() {
 
 		const self = this
-		document.title = "David Datuna";	
+		document.title = "David Datuna";
 		axios.get(domain + 'api')
 		  .then(function (response) {
-		  	
+
 		  	self.data = response.data
 		  	self.main_image = self.data.main_desc.main_image
 		  	self.desc_main = self.data.main_desc.desc_main
-		  	
+
 		  	self.data.news.map((e) => {
 		  		e.image = domain +'/images/thumb/' + e.image
 		  	})
@@ -252,8 +252,8 @@ export default {
 
 		  	self.data.works.map((e) => {
 		  		e.image = domain +'/images/thumb/' +  e.image
-		  	})		  	
-		  	self.found_image = domain +'/images/thumb/' + self.data.found.glob_found_image 
+		  	})
+		  	self.found_image = domain +'/images/thumb/' + self.data.found.glob_found_image
 
 		  	self.found_desc = self.data.found.glob_found
 		  	console.log(self.data);
@@ -263,7 +263,7 @@ export default {
 		    console.log(error);
 		  });
 
-  
+
 	},
 
 	mounted: function() {
@@ -271,10 +271,10 @@ export default {
 		var that = this
 
 		if (this.$route.name == 'Home1') {
-			
+
 			console.log(this.$route.params.id , this.$cookie.get('id'));
 			if (this.$route.params.id == this.$cookie.get('id')) {
-				
+
 				setTimeout(()=> {
 						$.post(
 						  domain + 'subscribe-api/add',
@@ -290,7 +290,7 @@ export default {
 						  if (that.$cookie.get('id')) {
 						  	 that.$cookie.delete('id')
 						  }
-						}					
+						}
 					}, 500)
 			}
 		}
@@ -300,9 +300,9 @@ export default {
 			separate_block = document.querySelector('.separate-block'),
 			bottom_block = document.querySelector('.header__bottom-block-wrapper'),
 			main_wrapper = document.querySelector('#app'),
-			
+
 			header = document.querySelector('.wrapper-header');
-			
+
 			document.querySelector('.header__title').style.opacity = 1;
 
 			  window.onscroll = function() {
@@ -315,7 +315,7 @@ export default {
 	        	header_image.style.transform = `translateY(${scrolled * -0.16}vh)`;
 	        }
 
-			
+
 
 
 			if (scrolled >= separate_block.offsetTop - 100) {
@@ -327,49 +327,49 @@ export default {
 
 			if (scrolled >= separate_block.offsetHeight) {
 				bottom_block.classList.add('header__bottom-block-wrapper--static');
-			}	    
+			}
 
 			if (scrolled >= separate_block.offsetHeight * 2 ) {
 				header.classList.add('wrapper-header--close')
 			}
-			
+
 			if(scrolled < separate_block.offsetHeight * 2) {
 				header.classList.contains('wrapper-header--close') ? header.classList.remove('wrapper-header--close') : true
-			}			    
+			}
 
 			if (scrolled <= separate_block.offsetHeight){
 				bottom_block.classList.remove('header__bottom-block-wrapper--static')
-				
-				
+
+
 			}
 
 
 			  };
 			  $(window).trigger('scroll')
-			
 
 
 
 
 
-	    // istagram **********************************
-		var token = '200786573.5e2d10c.779acf6471294b1192cac880ffed8259',
-		userid = 200786573,
-		num_photos = 4;
- 
-		axios.get(`https://api.instagram.com/v1/users/${userid}/media/recent`, {
-   		adapter: jsonpAdapter,			
-		    params: {
-		      access_token: token,
-		      count: num_photos,
-		    }
-		  })
-		  .then(function (data) {
-		  		that.instagram_data = data.data.data;
-		  })
-		  .catch(function (error) {
-		    console.log(error);
-		  });	
+
+	    // instagram **********************************
+		// var token = '200786573.5e2d10c.779acf6471294b1192cac880ffed8259',
+		// userid = 200786573,
+		// num_photos = 4;
+    //
+		// axios.get(`https://api.instagram.com/v1/users/${userid}/media/recent`, {
+   	// 	adapter: jsonpAdapter,
+		//     params: {
+		//       access_token: token,
+		//       count: num_photos,
+		//     }
+		//   })
+		//   .then(function (data) {
+		//   		that.instagram_data = data.data.data;
+		//   })
+		//   .catch(function (error) {
+		//     console.log(error);
+		//   });
 
 
 
