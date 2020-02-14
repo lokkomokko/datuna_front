@@ -54,7 +54,7 @@
 				</div>
 				<div class="footer__col footer__copy">
 					© David Datuna 2017<br>
-					<a href="https://x4.digital">Designed and developed by x4</a>
+					<a class="footer__x4" href="https://x4.digital" target="_blank" rel="noopener">Designed and developed by x4.digital</a>
 				</div>
 
 			</div>

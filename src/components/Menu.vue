@@ -3,24 +3,25 @@
 		<div class="menu">
 
 		<div class="wrap-f-title">
-			<router-link to="/" class="header__title title-usual">DAVID DATUNA</router-link>			
+			<router-link to="/" class="header__title title-usual">DAVID DATUNA</router-link>
 		</div>
 
 			<div class="menu__icons">
 				<div class="menu__icon-item" v-if="should_open"  v-html="menu"></div>
 				<div class="menu__icon-item-close" v-else v-html="menu_close"></div>
-				
+
 			</div>
 
-			
+
 			<nav class="menu__nav">
-				<router-link to="/works" class="menu-item">WORKS</router-link>	
+				<router-link to="/works" class="menu-item">WORKS</router-link>
 				<router-link to="/special-projects" class="menu-item">SPECIAL PROJECTS</router-link>
 				<!-- <router-link to="/foundation" class="menu-item">FOUNDATION</router-link> -->
 				<router-link to="/bio" class="menu-item">BIO</router-link>
 				<router-link to="/movie" class="menu-item">MOVIE</router-link>
 				<router-link to="/media" class="menu-item">MEDIA</router-link>
 				<router-link to="/news" class="menu-item">PRESS</router-link>
+        <a href="https://shop.datuna.com" class="menu-item" rel="noopener" target="_blank">Hungry artist</a>
 				<!-- <a href="http://shoplink.com" class="menu-item" target="_blank">SHOP</a>	 -->
 
 				<div class="nav__social">
@@ -52,7 +53,7 @@ import menu_close from '../assets/img/svg/menu-close.svg'
 			ins: render_svg(ins),
 			menu_close: render_svg(menu_close),
 			// scroll
-			should_open: true			
+			should_open: true
 
 	  	}
 	  },
@@ -69,8 +70,8 @@ import menu_close from '../assets/img/svg/menu-close.svg'
 	    	if (menu_count === 0) {
 		    	setTimeout(()=>{
 		    		document.querySelector('.header__title').classList.add('header__title--change-color')
-		    	}, 200)	 
-		    	menu_count = 1   		
+		    	}, 200)
+		    	menu_count = 1
 	    	}
 	    	else {
 	    		document.querySelector('.header__title').classList.remove('header__title--change-color')
@@ -92,21 +93,21 @@ import menu_close from '../assets/img/svg/menu-close.svg'
     		menu_count = 0
 	    	that.should_open = true
 	    }
-			
+
 			document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'
 			  window.onresize = function() {
-				document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'			  	
-			  }	
+				document.querySelector('.menu__nav').style.width = document.querySelector('.header__title').getBoundingClientRect().left + 200 + 'px'
+			  }
 
 		$(document).on('click', function(e) {
 			if ($(e.target).closest('.menu').length === 0) {
 				$('.menu').removeClass('menu--open')
 				that.should_open = true
-				
+
 			}
-		})	    
+		})
 
 	  }
 
-	}	
+	}
 </script>
