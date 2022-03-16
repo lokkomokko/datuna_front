@@ -21,7 +21,7 @@
 				<router-link to="/movie" class="menu-item">MOVIE</router-link>
 				<router-link to="/media" class="menu-item">MEDIA</router-link>
 				<router-link to="/news" class="menu-item">PRESS</router-link>
-        <a href="https://shop.datuna.com" class="menu-item" rel="noopener" target="_blank">Hungry artist</a>
+        <a href="https://shop.daviddatuna.com" class="menu-item" rel="noopener" target="_blank">Hungry artist</a>
 				<!-- <a href="http://shoplink.com" class="menu-item" target="_blank">SHOP</a>	 -->
 
 				<div class="nav__social">

@@ -7,7 +7,7 @@
 					<div class="work-page__breadcrumbs-wrap">
 						<router-link to="/works" class="work-page__breadcrumbs-item link-2">works</router-link>
 						<span class="button__arrow" v-html="btn_arrow"></span>
-						<router-link :to="{ name: 'Works_categories', params: { workName: (category_name).toLowerCase(), workId: category_name }}" class="work-page__breadcrumbs-item link-2">{{category_name}}</router-link>
+						<router-link :to="{ name: 'Works_categories', params: { workName: (category_name).toLowerCase().replaceAll(' ', '-'), workId: category_name }}" class="work-page__breadcrumbs-item link-2">{{category_name}}</router-link>
 					</div>
 					<div class="work-page__title-wrap">
 						<h1 class="work-page__title title-h1">{{data.title}}</h1>
@@ -15,7 +15,7 @@
 					<div class="work-page__desc" v-html="data.desc"></div>
 				</div>
 			</div>
-			<a :href="image" class="work-page__col work-page__col--big preloader">
+			<a :href="image" class="work-page__col work-page__col--big ">
 				<img :src="image" alt="" class="work-page__image">
 				<span class="spin-wrapper spin-wrap">
 					<span class="spin"></span>
@@ -24,11 +24,11 @@
 		</section>
 		<div class="work-page__buttons container">
 
-			<router-link :to="{name: 'Work_page', params : {workId: data.next, workName: data.category_name} }" class="button button--reverse" v-if="Number($route.params.workId) !== Number(data.next) && Number(data.next) !== 0">
+			<router-link :to="{name: 'Work_page', params : {workId: data.next, workName: data.category_name.toLowerCase().replaceAll(' ', '-')} }" class="button button--reverse" v-if="Number($route.params.workId) !== Number(data.next) && Number(data.next) !== 0">
 				<span class="button__arrow"  v-html="btn_arrow"></span>
 				previous
 			</router-link>
-			<router-link :to="{name: 'Work_page', params : {workId: data.prev, workName: data.category_name} }" class="work-page__btn-next button" v-if="Number($route.params.workId) !== Number(data.prev) && Number(data.prev) !== 0">
+			<router-link :to="{name: 'Work_page', params : {workId: data.prev, workName: data.category_name.toLowerCase().replaceAll(' ', '-')} }" class="work-page__btn-next button" v-if="Number($route.params.workId) !== Number(data.prev) && Number(data.prev) !== 0">
 				next
 				<span class="button__arrow" v-html="btn_arrow"></span>
 			</router-link>
@@ -103,10 +103,12 @@ var imagesLoaded = require('imagesloaded')
         // setTimeout(function () {
           self.image = self.data.image
         // }, 1000);
-				imagesLoaded(document.querySelector('.work-page__col--big img'), function(e) {
-					$('.work-page__col--big').removeClass('preloader')
-				})
-			},
+				// imagesLoaded(document.querySelector('.work-page__col--big img'), function(e) {
+				// 	$('.work-page__col--big').removeClass('preloader')
+				// })
+        $('.work-page__col--big').removeClass('preloader')
+
+      },
 		   	'$route' (to, from) {
 
 		  		var tl = new TimelineMax;

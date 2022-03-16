@@ -14,41 +14,41 @@
 						     duration: 1500,
 						     offset: offsetSize}" v-for="item in data" :key="item.id"
 						 >{{item.category_name}}</div>
-					
+
 					</div>
 				</div>
 			</div>
 
 			<div class="arts-section__container container container--gray">
-				
-				<router-link :to="{ name: 'Works_categories', params: { workName: (item.category_name).toLowerCase(), workId: item.title }}" class="arts-section__item art-item arts-section__item--preloader" :id="'_'+item.id" v-for="item in data" :key="item.id">
+
+				<router-link :to="{ name: 'Works_categories', params: { workName: (item.category_name).toLowerCase().replaceAll(' ', '-'), workId: item.title }}" class="arts-section__item art-item arts-section__item--preloader" :id="'_'+item.id" v-for="item in data" :key="item.id">
 					<div class="art-item__image">
 						<img :src="item.image" alt="">
 						<div class="spin-wrapper spin-wrapper--work">
 							<div class="spin"></div>
 						</div>
-					</div>	
+					</div>
 					<div class="art-item__text">
 						<div class="art-item__text-wrap-inner">
 							<div class="art-item__title-wrap">
 								<h4 class="art-item__title title-h4">{{item.category_name}}</h4>
 							</div>
 							<p class="art-item__desc">
-								 
+
 							{{item.desc}}
 							</p>
 							<div class="art-item__button button">
 								more
 								<span class="button__arrow" v-html="btn_arrow"></span>
-							</div>								
+							</div>
 						</div>
 					</div>
 				</router-link>
 
-											
-				
+
+
 			</div>
-			
+
 		</section>
 	</div>
 </template>
@@ -79,21 +79,21 @@ var imagesLoaded = require('imagesloaded')
 			  		self.data.map((e)=>{
 				  		e.image = domain +'images/thumb/'+ e.image
 			  		})
-		
-				
+
+
 			  })
 			  .catch(function (error) {
 			    console.log(error);
 			  });
-		},	
+		},
 		updated: function() {
 			imagesLoaded(document.querySelectorAll('.arts-section__item img'), function(e) {
 				$('.arts-section__item').removeClass('arts-section__item--preloader')
 			})
 
-		},			
+		},
 		mounted: function() {
-				
+
 
 			if ($(window).width() < 800) {
 				this.offsetSize = -60
@@ -111,7 +111,7 @@ var imagesLoaded = require('imagesloaded')
 
 				if (scrolled >= 50) {
 					header_title.style.opacity = 0
-				}			
+				}
 				else {
 					header_title.style.opacity = 1
 				}

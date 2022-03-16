@@ -141,7 +141,7 @@
 
 			<div class="arts-section__container container container--gray">
 
-				<router-link :to="{ name: 'Works_categories', params: { workName: (item.category_name).toLowerCase(), workId: item.title }}" :class="index % 2 ? 'arts-section__item arts-section__item-reverse art-item' : 'arts-section__item art-item'" v-for="(item, index) in data.works" :key="index">
+				<router-link :to="{ name: 'Works_categories', params: { workName: (item.category_name).toLowerCase().replaceAll(' ', '-'), workId: item.title }}" :class="index % 2 ? 'arts-section__item arts-section__item-reverse art-item' : 'arts-section__item art-item'" v-for="(item, index) in data.works" :key="index">
 				<template v-if="index % 2">
 					<div class="art-item__text">
 						<div class="art-item__text-wrap-inner">

@@ -10,8 +10,8 @@
 					<div class="arts-block__category-desc-wrap">
 						<p class="arts-block__category-desc">
 							{{cat_id.desc}}
-						</p> 
-					</div>	
+						</p>
+					</div>
 				</div>
 			</div>
 
@@ -19,28 +19,28 @@
 				<!-- <div class=""> -->
 				<!-- <div id="test"></div> -->
 				<!-- <div id="test2"></div> -->
-				
-					<router-link :to="{name: 'Work_page', params : {workId: item.id, workName: cat_id.category_name} }" class="cat-page__item cat-page__item--preloader" v-for="item in data.works" :key="item.id">
+
+					<router-link :to="{name: 'Work_page', params : {workId: item.id, workName: cat_id.category_name.toLowerCase().replaceAll(' ', '-')} }" class="cat-page__item cat-page__item--preloader" v-for="item in data.works" :key="item.id">
 					<img :src="item.image" alt="" class="cat-page__item-img">
 					<div class="spin-wrapper spin-wrapper--work-cat">
 						<div class="spin"></div>
 					</div>
 					</router-link>
 				<!-- </div> -->
-				
+
 			</div>
 
-	
 
-			
+
+
 		</section>
 		<div class="container cat-page__other-works" v-if="all_cat.length > 0">
 
 			<p class="cat-page__other-works-name">Other works: </p><br>
 			<template v-for="item in all_cat">
-				<router-link :to="{ name: 'Works_categories', params: { workName: (item.category_name).toLowerCase(), workId: item.title }}" class="link-2">{{item.category_name}}</router-link><br>	
+				<router-link :to="{ name: 'Works_categories', params: { workName: (item.category_name).toLowerCase().replaceAll(' ', '-'), workId: item.title }}" class="link-2">{{item.category_name}}</router-link><br>
 			</template>
-			
+
 		</div>
 	</div>
 </template>
@@ -50,14 +50,14 @@
 import render_svg from '../assets/js/render_svg.js'
 import btn_arrow from '../assets/img/svg/btn-arrow.svg'
 import domain from '../assets/js/config.js'
- 
+
 
 var imagesLoaded = require('imagesloaded')
 
 	export default {
 		data() {
 			return {
-				btn_arrow: render_svg(btn_arrow), 
+				btn_arrow: render_svg(btn_arrow),
 				data: {},
 				cat_id: [],
 				all_cat: [],
@@ -67,7 +67,7 @@ var imagesLoaded = require('imagesloaded')
 		name: 'Works_categories',
 
 		created: function() {
-		
+
 			const self = this
 
 			axios.get(domain +'api/works?type=cat_page&cat_name='+ self.$route.params.workName)
@@ -82,17 +82,17 @@ var imagesLoaded = require('imagesloaded')
 			  		self.all_cat = self.data.all_cat
 					const grid = document.querySelector('.cat-page__container')
 
-					// var pre = imagesLoaded($('.cat-page__container img')) 
+					// var pre = imagesLoaded($('.cat-page__container img'))
 					// pre.on('always', function(e) {
 					// 	// $('.cat-page__container img').on('load', function() {
 					// 		// $('.cat-page__item').removeClass('cat-page__item--preloader')
 					// 	// })
 					// console.log(e)
 
-							
+
 					// })
 
-					document.title = self.cat_id.category_name+". David Datuna";		  		
+					document.title = self.cat_id.category_name+". David Datuna";
 			  })
 			  .catch(function (error) {
 			  	// window.location.href = '/404'
@@ -102,9 +102,8 @@ var imagesLoaded = require('imagesloaded')
 		},
 		updated: function() {
 			  this.$nextTick(function () {
-			    console.log(this.data, '[eq');
-			  })			
-			
+			  })
+
 			imagesLoaded(document.querySelectorAll('.cat-page__container img'), function(e) {
 				$('.cat-page__item').removeClass('cat-page__item--preloader')
 			})
@@ -112,7 +111,7 @@ var imagesLoaded = require('imagesloaded')
 		},
 		watch: {
 		   	'$route' (to, from) {
-				
+
 				const self = this
 
 				$('.cat-page__item').addClass('cat-page__item--preloader')
@@ -129,27 +128,27 @@ var imagesLoaded = require('imagesloaded')
 				  		self.cat_id = self.data.cat_id
 				  		self.all_cat = self.data.all_cat
 
-						
-				  		
-				  		document.title = self.cat_id.category_name.substr(0, 1).toUpperCase()+self.cat_id.category_name.substr(1)+". David Datuna";	
+
+
+				  		document.title = self.cat_id.category_name.substr(0, 1).toUpperCase()+self.cat_id.category_name.substr(1)+". David Datuna";
 
 				  })
 				  .catch(function (error) {
 				  	window.location.href = '/404'
-				  	
+
 				    console.log(error);
 				  });
 		    }
-		},			
+		},
 		mounted: function() {
-		
+
 			this.widthYes = $(window).width()
 
 			if ($(window).width() < 800) {
 				$('.cat-page__container').append($('.arts-block__category-desc'))
 				$('.arts-block__category-desc').addClass('moved')
 			}
-			var wrap = $('.cat-page__container') 
+			var wrap = $('.cat-page__container')
 			var text = $('.arts-block__category-desc')
 
 			$(window).resize(()=>{
@@ -160,7 +159,7 @@ var imagesLoaded = require('imagesloaded')
 						wrap.prepend($('.moved'))
 						console.log('if')
 					}
-				}				
+				}
 				else {
 					if (text.hasClass('moved')) {
 						$('.moved').removeClass('moved')
@@ -182,7 +181,7 @@ var imagesLoaded = require('imagesloaded')
 
 				if (scrolled >= 50) {
 					header_title.style.opacity = 0
-				}			
+				}
 				else {
 					header_title.style.opacity = 1
 				}
